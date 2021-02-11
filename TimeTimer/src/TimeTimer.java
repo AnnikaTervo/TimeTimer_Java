@@ -1,3 +1,5 @@
+
+import java.util.TimerTask;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
@@ -6,7 +8,6 @@ import javafx.geometry.* ; // Pos, Insets, Point2D, Orientation
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
 import static javafx.scene.paint.Color.BLACK;
 import javafx.scene.text.Text;
 
@@ -17,12 +18,15 @@ public class TimeTimer extends Application {
         Stage window;
         Scene scene;
         Button button;
-        
+        Integer s;
+        Integer minutes;
+        private timer timer;
         
 
         @Override
     public void start(Stage stage)
     {
+        
         try{
             // Luo ensin näyttämö Stage, ja luo sinne Scene, Sceneen voi
             //lisätä vaikka hboxin johon labeleita
@@ -44,15 +48,12 @@ public class TimeTimer extends Application {
             pane.setTop(aika);
             pane.setLeft(button);
             Text time = new Text();
-            //tekstin
+            //tekstin muuttaminen ajaksi
             button.setOnAction( e -> {
                 Integer timeMinutes = Integer.valueOf(aika.getText());
-                Integer s = timeMinutes;
-                while (s>0){
-                    time.setText(s.toString());
-                }
-                
-                //
+                s = timeMinutes;
+                //time.setText(s.toString());
+              
             });
                 
                     
@@ -75,7 +76,17 @@ public class TimeTimer extends Application {
         }
     }
     
-    
+     private void startTimer(int minutes)
+    {
+        timer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+           time.setText(minutes.toString());
+                if (--minutes > 0) startTimer(minutes);
+            }
+        }, 60000);
+    }
+
     
     
     
