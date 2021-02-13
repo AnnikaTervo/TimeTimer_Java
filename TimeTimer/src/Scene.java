@@ -13,10 +13,6 @@ import javafx.scene.layout.BorderPane;
  */
 public class Scene {
 
-    Scene(Vbox layout, int i, int i0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     Scene(BorderPane layout, int i, int i0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
