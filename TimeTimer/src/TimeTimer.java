@@ -19,8 +19,9 @@ public class TimeTimer extends Application {
         Scene scene;
         Button button;
         Integer s;
-        Integer minutes;
+        int minutes;
         private timer timer;
+        TextField time;
         
 
         @Override
@@ -38,30 +39,26 @@ public class TimeTimer extends Application {
             // tehdään tekstikenttä jossa kysytään aikaa
             TextField aika = new TextField();
             aika.setPrefWidth(200);
-            aika.setMaxWidth(200);
+            aika.setMaxWidth(150);
             
             button = new Button("Aseta aika minuutteina");
 
-
+            // Helpoimman kautta eli pane pystyyn
             BorderPane pane = new BorderPane();
             pane.setPadding(new Insets(20,20,20,20));
+            
             pane.setTop(aika);
             pane.setLeft(button);
             Text time = new Text();
             //tekstin muuttaminen ajaksi
             button.setOnAction( e -> {
                 Integer timeMinutes = Integer.valueOf(aika.getText());
-                s = timeMinutes;
+                minutes = timeMinutes;
                 //time.setText(s.toString());
               
-            });
-                
-                    
+            });                   
             
-            
-            
-            //Ajan tulostaminen
-            
+                       
             //time.setText("");
             pane.setBottom(time);
             scene = new Scene(pane, 300, 300);
@@ -75,19 +72,18 @@ public class TimeTimer extends Application {
             System.out.println("It didn't work");
         }
     }
-    
+     
      private void startTimer(int minutes)
     {
         timer.schedule(new TimerTask() {
         @Override
         public void run() {
+            // nämä ei toiminut Jussi auta, sano et int cant be deferenced
            time.setText(minutes.toString());
-                if (--minutes > 0) startTimer(minutes);
+            if (--minutes > 0) startTimer(minutes);
             }
         }, 60000);
     }
-
-    
     
     
     
